@@ -1,4 +1,4 @@
-## Greedy하게 짐 나르기
+## movingStuff
 
 <br/>
 
@@ -6,6 +6,8 @@
 > 무게를 담은 배열 stuff <br/>
 > 무게 제한 limit <br/>
 > 모든 짐을 옮기기 위한 박스의 최소 개수를 구한다. <br/>
+
+<br/>
 
 ```js
 function movingStuff(stuff, limit) {

@@ -1,6 +1,12 @@
-// Toy 13번 문제
-// 문제 : 정수를 요소로 갖는 배열을 입력받아 오름차순으로 정렬하여 리턴
+## insertionSort
 
+<br/>
+
+> 정수를 요소로 갖는 배열을 입력받아 오름차순으로 정렬하여 리턴한다. <br/>
+
+<br/>
+
+```js
 const insertionSort = function (arr) {
   let result = [...arr];
 
@@ -39,3 +45,4 @@ console.log(output);
 // temp = 21
 // index = 1
 // result[2] = 21
+```

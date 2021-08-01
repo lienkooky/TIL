@@ -1,4 +1,8 @@
-//algorithm basic 20번 문제
+## compressString
+
+<br/>
+
+```js
 function compressString(str) {
   // 연속되는 문자를 기록하기 위한 변수
   // 첫 번째 문자로 초기화
@@ -39,3 +43,4 @@ console.log(output);
 // 처음에는 before가 str[i]와 다를 때 countbefore해주고 다시 before로 돌아가니까 str[0]이 아닌가?
 // 아래에 before = str[i]가 있으면 countberfore에 before가 str[0] 이 들어간다는건지 str[i] 가 들어간다는 건지 헷갈렸음
 // 결론은, else안에 if문을 거치던 else문을 거치던 그 조건을 수행하고 나면 before는 str[i]가 된다 그러면 str[i]부터 다시 반복문이 시작된다.
+```
