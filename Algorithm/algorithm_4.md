@@ -4,45 +4,63 @@
 
 > 훔치고 싶은 target 금액과 금고에 있는 돈의 종류 type을 입력받아, <br/>
 > 조지가 target을 훔칠 수 있는 방법의 수를 리턴한다. <br/>
-
-<br/>
+> <br/>
 
 ```js
-// operation은 말을 움직이게 한다.(string 타입)
-function boardGame(board, operation) {
-  // 말을 상, 하, 좌, 우로 움직이게 하기 위한 배열을 만든다.
-  const DIR = {
-    U: [-1, 0],
-    D: [1, 0],
-    L: [0, -1],
-    R: [0, 1],
-  };
+function ocean(target, type) {
+  // bag 이라는 배열에 금액을 만들 수 있는 경우의 수를 기록
+  // 각 인덱스 no# = 만드려는 금액을 의미
+  // ex) target = 5, type = [1, 2, 5] 면
+  // bag[3] = 2  => 3을 만드는 경우의 수 = 1만 사용 & 1,2 함께 사용
+  // bag[4] = 2  => 4를 만드는 경우의 수 = 1만 사용 & 1,2 함께 사용
+  // bag[5] = 4  => 5를 만드는 경우의 수 = 1*5 , 1*3 + 2, 1 + 2*2, 5*1
+  // 0 을 만들 수 있는 경우는 아무것도 선택하지 않으면 되기 때문에 bag[0] = 1 로 초기값 설정
+  let bag = [1];
 
-  // 말이 움직일 때 놓일 x축 좌표, y축 좌표
-  let X = 0;
-  let Y = 0;
-  // 말이 움직일 때 획득하게 될 점수
-  let score = 0;
-
-  const LEN = operation.length;
-
-  // x,y는 0이상이어야하고 LEN의 길이보다는 작아야 한다.
-  // 즉, 맵의 크기 안에서 돌아야 한다. 나가면 `OUT`
-  const isValid = (y, x) => 0 <= y && y < LEN && 0 <= x && x < LEN;
-
-  for (let i = 0; i < LEN; i++) {
-    // 말이 움직인 좌표를 꺼낸다.
-    const [dY, dX] = DIR[operation[i]];
-    Y += dY;
-    X += dX;
-
-    // 맵의 크기를 벗어나면
-    if (isValid(Y, X) === false) return `OUT`;
-
-    // 맵의 크기를 벗어나지 않았다면
-    score += board[Y][X];
+  // 인덱스 no# = 만드려는 금액 이기 때문에
+  // bag 을 target 금액만큼의 길이를 가진 배열을 만들어 주고,
+  // 경우의 수를 저장하기 위해 초기값은 모두 0으로 만들어 준다
+  for (let i = 1; i <= target; i++) bag[i] = 0;
+  // 돈의 종류가 담겨있는 배열을 순차적으로 탐색
+  for (let i = 0; i < type.length; i++) {
+    // target 금액까지 순차적으로 1씩 증가하면서
+    for (let j = 1; j <= target; j++)
+      // bag의 인덱스가 type[i] 보다 큰 구간만
+      // (작은 구간은 type[i]로 만들 수 없는 금액이기 때문에 탐색할 필요가 없다)
+      if (type[i] <= j)
+        // 기존 경우의 수에 type[i]를 뺀 금액을 만들 수 있는 경우의 수를 더해준다
+        bag[j] += bag[j - type[i]];
   }
+  // bag 의 target 인덱스에 target 금액을 훔칠 수 있는 경우의 수가 쌓이므로
+  // 해당 값을 리턴해 준다
+  return bag[target];
+}
+function ocean(target, type) {
+  // bag 이라는 배열에 금액을 만들 수 있는 경우의 수를 기록
+  // 각 인덱스 no# = 만드려는 금액을 의미
+  // ex) target = 5, type = [1, 2, 5] 면
+  // bag[3] = 2  => 3을 만드는 경우의 수 = 1만 사용 & 1,2 함께 사용
+  // bag[4] = 2  => 4를 만드는 경우의 수 = 1만 사용 & 1,2 함께 사용
+  // bag[5] = 4  => 5를 만드는 경우의 수 = 1*5 , 1*3 + 2, 1 + 2*2, 5*1
+  // 0 을 만들 수 있는 경우는 아무것도 선택하지 않으면 되기 때문에 bag[0] = 1 로 초기값 설정
+  let bag = [1];
 
-  return score;
+  // 인덱스 no# = 만드려는 금액 이기 때문에
+  // bag 을 target 금액만큼의 길이를 가진 배열을 만들어 주고,
+  // 경우의 수를 저장하기 위해 초기값은 모두 0으로 만들어 준다
+  for (let i = 1; i <= target; i++) bag[i] = 0;
+  // 돈의 종류가 담겨있는 배열을 순차적으로 탐색
+  for (let i = 0; i < type.length; i++) {
+    // target 금액까지 순차적으로 1씩 증가하면서
+    for (let j = 1; j <= target; j++)
+      // bag의 인덱스가 type[i] 보다 큰 구간만
+      // (작은 구간은 type[i]로 만들 수 없는 금액이기 때문에 탐색할 필요가 없다)
+      if (type[i] <= j)
+        // 기존 경우의 수에 type[i]를 뺀 금액을 만들 수 있는 경우의 수를 더해준다
+        bag[j] += bag[j - type[i]];
+  }
+  // bag 의 target 인덱스에 target 금액을 훔칠 수 있는 경우의 수가 쌓이므로
+  // 해당 값을 리턴해 준다
+  return bag[target];
 }
 ```
