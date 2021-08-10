@@ -3,8 +3,7 @@
 <br/>
 
 > 훔치고 싶은 target 금액과 금고에 있는 돈의 종류 type을 입력받아, <br/>
-> 조지가 target을 훔칠 수 있는 방법의 수를 리턴한다. <br/>
-> <br/>
+> 조지가 target을 훔칠 수 있는 방법의 수를 리턴한다. <br/> > <br/>
 
 ```js
 function ocean(target, type) {
@@ -63,4 +62,5 @@ function ocean(target, type) {
   // 해당 값을 리턴해 준다
   return bag[target];
 }
+// 이거 언제 다하징..ㅠ
 ```
