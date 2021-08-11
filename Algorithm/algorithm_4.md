@@ -62,5 +62,4 @@ function ocean(target, type) {
   // 해당 값을 리턴해 준다
   return bag[target];
 }
-// 이거 언제 다하징..ㅠ
 ```
