@@ -45,4 +45,5 @@ console.log(output);
 // temp = 21
 // index = 1
 // result[2] = 21
+// 이거 이해하기 어려웠음..
 ```
